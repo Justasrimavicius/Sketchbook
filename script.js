@@ -28,24 +28,32 @@ function SliderMoved(){
         }
 }
 
-// let currentColor;
-// const arrayAllColors=Array.from(allColors);
+let currentColor='black';
+
+
+// Gets the color from the color choosing block when clicked.
+allColors.forEach(function(element){
+
+        element.addEventListener('click',function(){
+            const x = document.querySelector(`.${currentColor}`);
+            x.style.borderColor=`chartreuse`;
+            currentColor=element.classList.value.slice(6);
+            element.style.borderColor='darkorange';
+        });
+});
 
 
 
-// arrayAllColors.forEach(function(){
-//         this.addEventListener('click',function(){
-//             currentColor=this.name;
-//             console.log(currentColor);
-//         });
-// });
+function ChooseColor(){
 
-
-
-// function ChooseColor(){
-
-// }
-
+}
+let isPointerDown=false;
+gridContainer.addEventListener('pointerdown',function(){
+    isPointerDown=true;
+});
+gridContainer.addEventListener('pointerup', function(){
+    isPointerDown=false;
+});
 
 
 // Creates the grid - firstly deletes the previous boxes, then creates new boxes with the dimensions given. An event listener is added to each of the boxes to know, when the cursor enters their perimeter.
@@ -60,9 +68,11 @@ function CreateGrid(dimensions){
         oneBox.style.width=`${400/dimensions}`+`px`;
         oneBox.style.height=`${400/dimensions}`+`px`;
         oneBox.addEventListener('pointerenter',function(){
-            if(oneBox.style.background!='white'){
-            oneBox.style.background='white';}})
+            if(isPointerDown==true){
+            if(oneBox.style.background!=`${currentColor}`){
+            oneBox.style.background=`${currentColor}`;}}})
     }
+
 
 
 }
